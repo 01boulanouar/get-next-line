@@ -19,9 +19,11 @@ static char	*ft_read(int fd, char *buffer, char *storage)
 
 	while (1)
 	{
+		if (storage && ft_strchr(storage, '\n'))
+			break ;
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
-			return (free(storage), NULL);
+			return (free(storage), storage = NULL, NULL);
 		if (bytes_read == 0)
 			return (storage);
 		buffer[bytes_read] = '\0';
@@ -30,8 +32,6 @@ static char	*ft_read(int fd, char *buffer, char *storage)
 		if (!new_storage)
 			return (NULL);
 		storage = new_storage;
-		if (ft_strchr(storage, '\n'))
-			break ;
 	}
 	return (storage);
 }
@@ -75,13 +75,14 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*buffer;
 
-	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0 || BUFFER_SIZE >= INT_MAX)
+	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = (char *)malloc(BUFFER_SIZE + 1);
+	buffer = (char *)malloc((size_t)BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
 	storage = ft_read(fd, buffer, storage);
 	free(buffer);
+	buffer = NULL;
 	line = ft_get_line(storage);
 	storage = ft_update_storage(storage);
 	return (line);
