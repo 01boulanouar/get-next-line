@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:36:52 by moboulan          #+#    #+#             */
-/*   Updated: 2024/11/18 11:38:55 by moboulan         ###   ########.fr       */
+/*   Updated: 2024/12/05 21:20:28 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static char	*ft_read(int fd, char *buffer, char *storage)
 
 	while (1)
 	{
-		if (storage && ft_strchr(storage, '\n'))
-			break ;
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
 			return (free(storage), storage = NULL, NULL);
@@ -32,6 +30,8 @@ static char	*ft_read(int fd, char *buffer, char *storage)
 		if (!new_storage)
 			return (NULL);
 		storage = new_storage;
+		if (ft_strchr(storage, '\n'))
+			break ;
 	}
 	return (storage);
 }
