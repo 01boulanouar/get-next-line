@@ -6,7 +6,7 @@
 /*   By: moboulan <moboulan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 13:08:16 by moboulan          #+#    #+#             */
-/*   Updated: 2024/11/17 17:51:46 by moboulan         ###   ########.fr       */
+/*   Updated: 2024/12/07 08:59:52 by moboulan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #  define BUFFER_SIZE 42
 # endif
 
-# include <fcntl.h>
 # include <limits.h>
 # include <stdlib.h>
 # include <unistd.h>
